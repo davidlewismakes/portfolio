@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Dark only, by design. */
+:root {
+  --background: oklch(18.5% 0.014 232);
+  --surface: oklch(23% 0.018 232);
+  --surface-raised: oklch(28% 0.022 232);
+  --foreground: oklch(94% 0.009 165);
+  --muted: oklch(73% 0.021 169);
+  --rule: oklch(94% 0.009 165 / 15%);
+  --accent: oklch(80% 0.088 77);
+  --on-accent: oklch(19% 0.027 75);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-newsreader);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.site-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.career-role {
+  position: relative;
+}
+
+.career-role::before {
+  position: absolute;
+  top: 0.45rem;
+  left: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--muted);
+  content: "";
+}
+
+.career-role:first-child::before {
+  background: var(--accent);
+}
+
+.career-role:not(:last-child)::after {
+  position: absolute;
+  top: 0.95rem;
+  bottom: -0.45rem;
+  left: calc(0.25rem - 0.5px);
+  width: 1px;
+  background: var(--rule);
+  content: "";
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
