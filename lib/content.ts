@@ -15,7 +15,8 @@ export const SITE = {
 
 export const HERO = {
   headline: "Make critical work happen faster.",
-  intro: "I’m a Sales Engineering professional and founder based in Seattle. I’ve led enterprise discovery and built pre-sales teams. I build AI products and prototypes for security reviews, healthcare intake, and compliance.",
+  intro: "👋 Hi, I’m David—a Seattle-based Sales Engineer and builder with a background in automation, security, and AI. Over the past 10+ years, I’ve helped global organizations adopt cutting-edge tech and uncover clear business value.",
+  followup: "These days, I partner with teams of all sizes to tackle complex problems and capture more ROI on tech investments.",
 };
 
 export type Link = { label: string; url: string };
@@ -31,11 +32,16 @@ export type Project = {
   details?: string[];
   stack?: string[];
   links?: Link[];
+  screenshots?: { src: string; alt: string; caption: string }[];
 };
 
 export const PROJECTS: Project[] = [
   {
     title: "Mate",
+    screenshots: [
+      { src: "/projects/mate-workspace.png", alt: "Mate questionnaire workspace with questions, draft answers, and approval status", caption: "Application preview using fictional company records and questions." },
+      { src: "/projects/mate.png", alt: "Mate website showing a sample security answer with supporting evidence", caption: "Public website with an illustrative evidence-backed response." },
+    ],
     type: "Shipped product",
     industry: "SaaS",
     highlight: "Draft → Review → Export",

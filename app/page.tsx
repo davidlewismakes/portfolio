@@ -8,6 +8,7 @@ import {
 } from "@/lib/content";
 
 import { ProjectGallery } from "./project-gallery";
+import Image from "next/image";
 
 const wrap = "mx-auto w-full max-w-5xl px-6 md:px-10";
 
@@ -95,7 +96,13 @@ export default function Home() {
           <h1 className="max-w-4xl font-display text-[clamp(2.5rem,6.4vw,4.75rem)] font-bold leading-[1.03] tracking-[-0.035em] text-balance">
             {HERO.headline}
           </h1>
-          <p className="mt-5 max-w-[38rem] text-xl text-muted">{HERO.intro}</p>
+          <div className="mt-6 grid items-start gap-6 sm:grid-cols-[minmax(0,1fr)_9rem] md:grid-cols-[minmax(0,1fr)_11rem]">
+            <div className="max-w-[38rem] space-y-4 text-xl text-muted">
+              <p>{HERO.intro}</p>
+              <p>{HERO.followup}</p>
+            </div>
+            <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="row-start-1 size-24 rounded-md object-cover sm:col-start-2 sm:size-36 md:size-44" />
+          </div>
 
           <div className="mt-6 flex flex-wrap gap-3 font-display font-semibold">
             <a
@@ -147,6 +154,9 @@ export default function Home() {
             <span className="text-sm"><ExtLink link={OTHER.link} /></span>
           </div>
           <p className="mt-1 text-muted">{OTHER.summary}</p>
+          <a href={OTHER.link.url} className="mt-4 block max-w-xl">
+            <Image src="/projects/occidental.png" alt="Occidental Studio website featuring its Seattle loft and direct booking options" width={1440} height={1000} className="h-auto w-full rounded-md border border-rule" />
+          </a>
         </Section>
 
         <Section id="contact" title="Contact">

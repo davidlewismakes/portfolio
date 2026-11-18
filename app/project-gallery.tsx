@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { PROJECTS, type Project } from "@/lib/content";
+import Image from "next/image";
 
 const types = [...new Set(PROJECTS.map((project) => project.type))];
 const industries = [...new Set(PROJECTS.map((project) => project.industry))];
@@ -52,6 +53,14 @@ function ProjectRow({ project }: { project: Project }) {
         </span>
       </summary>
       <div className="max-w-[36rem] space-y-3 pb-5 text-base">
+        {project.screenshots?.map((screenshot) => (
+          <figure key={screenshot.src}>
+            <a href={screenshot.src} target="_blank" rel="noopener noreferrer" aria-label={`View full screenshot of ${project.title}`}>
+              <Image src={screenshot.src} alt={screenshot.alt} width={1440} height={1000} className="h-auto w-full rounded-md border border-rule" />
+            </a>
+            <figcaption className="mt-1 font-display text-sm text-muted">{screenshot.caption}</figcaption>
+          </figure>
+        ))}
         <p className="font-display text-sm text-muted">{project.context}</p>
         <p>{project.summary}</p>
         {project.details && (
