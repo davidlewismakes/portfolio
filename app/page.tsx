@@ -101,12 +101,27 @@ export default function Home() {
               <p>{HERO.intro}</p>
               <p>{HERO.followup}</p>
             </div>
-            <div className="row-start-1 w-36 sm:col-start-2 md:w-44">
+            <div className="row-start-1 w-44 sm:col-start-2 sm:-mt-10 md:-mt-14">
               <div className="portrait-frame mx-auto w-28 sm:w-36 md:w-44">
                 <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="relative z-10 aspect-square w-full rounded-full object-cover" />
               </div>
-              <ul aria-label="Professional profiles" className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 font-display text-sm">
-                {links.map((link) => <li key={link.url}><ExtLink link={link} /></li>)}
+              <svg aria-hidden="true" viewBox="0 0 176 44" fill="none" className="block h-11 w-44 text-muted/40">
+                <path d="M88 0v12q0 10-10 10H52q-10 0-10 10v12M88 12q0 10 10 10h26q10 0 10 10v12" stroke="currentColor" strokeWidth="1" />
+              </svg>
+              <ul aria-label="Professional profiles" className="flex justify-between px-5">
+                {links.map((link) => (
+                  <li key={link.url}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.label} title={link.label} className="grid size-11 place-items-center rounded-full border border-rule bg-surface text-muted hover:border-accent/50 hover:text-foreground">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="currentColor">
+                        {link.label === "LinkedIn" ? (
+                          <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.46 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.29 10.85H15.8V14.1c0-1.1-.02-2.52-1.54-2.52-1.54 0-1.78 1.2-1.78 2.44v4.73H9.53V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.98 0 3.56 1.96 3.56 4.5v5.27Z" />
+                        ) : (
+                          <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.29-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.29-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.46 3.1-1.15 3.1-1.15.61 1.55.23 2.69.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.27-5.14 5.55.4.35.76 1.03.76 2.08v3.11c0 .3.2.65.77.54A11.25 11.25 0 0 0 12 .75Z" />
+                        )}
+                      </svg>
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
