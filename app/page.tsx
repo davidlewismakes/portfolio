@@ -3,11 +3,13 @@ import {
   EXPERIENCE,
   HERO,
   OTHER,
+  RECOMMENDATIONS,
   SITE,
   type Link,
 } from "@/lib/content";
 
 import { ProjectGallery } from "./project-gallery";
+import { Recommendation } from "./recommendation";
 import Image from "next/image";
 
 const wrap = "mx-auto w-full max-w-5xl px-6 md:px-10";
@@ -161,6 +163,11 @@ export default function Home() {
                     <summary className="w-fit cursor-pointer font-display text-sm hover:text-accent">Role highlights</summary>
                     <p className="mt-2 max-w-[36rem]">{r.note}</p>
                   </details>
+                  {r.org === "LeanData" && (
+                    <div className="mt-4">
+                      <Recommendation recommendation={RECOMMENDATIONS.leadership} />
+                    </div>
+                  )}
                 </div>
               </li>
             ))}
@@ -180,6 +187,9 @@ export default function Home() {
         </Section>
 
         <Section id="contact" title="Contact">
+          <div className="mb-7">
+            <Recommendation recommendation={RECOMMENDATIONS.client} />
+          </div>
           <p className="max-w-[34rem] text-xl">{CONTACT.blurb}</p>
           <p className="mt-6">
             <a

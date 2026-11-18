@@ -1,8 +1,9 @@
 "use client";
 
 import { useId, useState } from "react";
-import { PROJECTS, type Project } from "@/lib/content";
+import { PROJECTS, RECOMMENDATIONS, type Project } from "@/lib/content";
 import Image from "next/image";
+import { Recommendation } from "./recommendation";
 
 const types = [...new Set(PROJECTS.map((project) => project.type))];
 const industries = [...new Set(PROJECTS.map((project) => project.industry))];
@@ -132,6 +133,11 @@ export function ProjectGallery() {
             <button type="button" onClick={clearFilters} className="mt-2 min-h-11 rounded-md border border-rule px-4 font-display text-sm font-semibold hover:bg-surface">
               Clear filters
             </button>
+          </div>
+        )}
+        {!type && !industry && (
+          <div className="mt-8">
+            <Recommendation recommendation={RECOMMENDATIONS.delivery} />
           </div>
         )}
       </div>

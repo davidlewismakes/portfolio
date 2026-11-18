@@ -21,6 +21,34 @@ export const HERO = {
 
 export type Link = { label: string; url: string };
 
+export type Recommendation = {
+  quote: string;
+  author: string;
+  relationship: string;
+  year: string;
+};
+
+export const RECOMMENDATIONS: Record<string, Recommendation> = {
+  delivery: {
+    quote: "David is exceptional in his ability to design, present, and deliver working solutions for his customers.",
+    author: "Yuji Higashi",
+    relationship: "Former manager at Outreach",
+    year: "2018",
+  },
+  leadership: {
+    quote: "He is authentic and efficient in his approach to work and can enable and coach others well.",
+    author: "David Ashworth",
+    relationship: "Former manager at LeanData",
+    year: "2020",
+  },
+  client: {
+    quote: "The client always felt that we were delivering an outstanding experience greatly due to David's focus and attention to detail.",
+    author: "Rob Kasnitz",
+    relationship: "Colleague at Outreach",
+    year: "2017",
+  },
+};
+
 export type Project = {
   type: "Shipped product" | "Proof of concept" | "Demo" | "Prototype";
   industry: "SaaS" | "Technology" | "Healthcare" | "Pharmacy" | "Retail" | "Productivity";
