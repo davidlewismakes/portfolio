@@ -43,6 +43,27 @@ body {
   min-height: 100dvh;
 }
 
+.portrait-frame {
+  position: relative;
+  isolation: isolate;
+  padding: 0.5rem;
+  border: 1px solid color-mix(in oklch, var(--accent) 35%, transparent);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--surface-raised), var(--background));
+  box-shadow: 0 0 3rem color-mix(in oklch, var(--accent) 6%, transparent);
+}
+
+.portrait-frame::before {
+  position: absolute;
+  inset: -0.65rem;
+  border: 1px solid var(--rule);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  content: "";
+}
+
 .career-role {
   position: relative;
 }

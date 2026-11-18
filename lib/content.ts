@@ -23,7 +23,7 @@ export type Link = { label: string; url: string };
 
 export type Project = {
   type: "Shipped product" | "Proof of concept" | "Demo" | "Prototype";
-  industry: "SaaS" | "Technology" | "Healthcare" | "Pharmacy" | "Retail";
+  industry: "SaaS" | "Technology" | "Healthcare" | "Pharmacy" | "Retail" | "Productivity";
   highlight: string;
   outcome: string;
   title: string;
@@ -32,6 +32,7 @@ export type Project = {
   details?: string[];
   stack?: string[];
   links?: Link[];
+  sourceLinks?: Link[];
   screenshots?: { src: string; alt: string; caption: string }[];
 };
 
@@ -56,6 +57,22 @@ export const PROJECTS: Project[] = [
     ],
     stack: ["LangGraph", "RAG", "Vercel", "Supabase", "DigitalOcean"],
     links: [{ label: "withmate.ai", url: "https://withmate.ai" }],
+    sourceLinks: [
+      { label: "Review routing", url: "https://github.com/davidlewismakes/source-review-routing" },
+      { label: "Evidence & export", url: "https://github.com/davidlewismakes/evidence-and-export" },
+      { label: "Standalone review demo", url: "https://github.com/davidlewismakes/questionnaire-review-demo" },
+    ],
+  },
+  {
+    title: "Screenshot to PDF",
+    type: "Shipped product",
+    industry: "Productivity",
+    highlight: "Browser-based conversion",
+    outcome: "Combine screenshots into one ordered PDF without sending image files to a conversion server.",
+    context: "Personal project · Browser tool and MCP plugin",
+    summary: "Arrange up to 50 screenshots, choose a quality setting, and generate one PDF in the browser. The MCP server delivers the interface, while image processing stays on the device. An optional Library save sends the finished PDF to ChatGPT when selected.",
+    stack: ["JavaScript", "Node.js", "MCP"],
+    links: [{ label: "GitHub", url: "https://github.com/davidlewismakes/screenshot-to-pdf" }],
   },
   {
     title: "Unified regulatory compliance platform",
@@ -113,6 +130,7 @@ export const OTHER = {
   title: "Occidental Studio",
   summary: "A Seattle production and event space I run. I built its direct-booking site.",
   link: { label: "Visit Occidental Studio", url: "https://occidentalstudio.com" },
+  source: { label: "Booking example on GitHub", url: "https://github.com/davidlewismakes/booking-quote-demo" },
 };
 
 export type Role = { years: string; title?: string; org: string; note: string };

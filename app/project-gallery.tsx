@@ -69,6 +69,16 @@ function ProjectRow({ project }: { project: Project }) {
           </ul>
         )}
         {project.stack && <p className="font-display text-sm text-muted">{project.stack.join(" · ")}</p>}
+        {project.sourceLinks && (
+          <div className="font-display text-sm">
+            <p className="mb-1 text-muted">Code examples</p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-2">
+              {project.sourceLinks.map((link) => (
+                <li key={link.url}><a href={link.url} className="underline decoration-muted/50 underline-offset-4 hover:decoration-accent">{link.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </details>
   );

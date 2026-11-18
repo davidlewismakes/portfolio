@@ -101,7 +101,9 @@ export default function Home() {
               <p>{HERO.intro}</p>
               <p>{HERO.followup}</p>
             </div>
-            <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="row-start-1 size-24 rounded-md object-cover sm:col-start-2 sm:size-36 md:size-44" />
+            <div className="portrait-frame row-start-1 w-28 sm:col-start-2 sm:w-36 md:w-44">
+              <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="relative z-10 aspect-square w-full rounded-full object-cover" />
+            </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3 font-display font-semibold">
@@ -154,6 +156,7 @@ export default function Home() {
             <span className="text-sm"><ExtLink link={OTHER.link} /></span>
           </div>
           <p className="mt-1 text-muted">{OTHER.summary}</p>
+          <p className="mt-2 font-display text-sm"><ExtLink link={OTHER.source} /></p>
           <a href={OTHER.link.url} className="mt-4 block max-w-xl">
             <Image src="/projects/occidental.png" alt="Occidental Studio website featuring its Seattle loft and direct booking options" width={1440} height={1000} className="h-auto w-full rounded-md border border-rule" />
           </a>
