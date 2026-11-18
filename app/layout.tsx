@@ -17,10 +17,18 @@ export const metadata: Metadata = {
   title: SITE.title,
   description: SITE.description,
   metadataBase: new URL(SITE.url),
+  alternates: { canonical: SITE.url },
   openGraph: {
+    url: SITE.url,
+    siteName: "David Lewis Makes",
     title: SITE.title,
     description: SITE.description,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.title,
+    description: SITE.description,
   },
 };
 

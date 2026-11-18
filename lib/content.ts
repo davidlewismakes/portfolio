@@ -167,5 +167,5 @@ export const CONTACT = {
   email: "davidlewismakes@gmail.com",
   linkedin: "https://www.linkedin.com/in/dlewis88/",
   github: "https://github.com/davidlewismakes",
-  resume: "" as string, // TODO: "/resume.pdf" after adding the file to /public
+  resume: "/resume.pdf",
 };
