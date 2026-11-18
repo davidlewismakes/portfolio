@@ -16,7 +16,7 @@ export const SITE = {
 export const HERO = {
   headline: "Make critical work happen faster.",
   intro: "👋 Hi, I’m David—a Seattle-based Sales Engineer and builder with a background in automation, security, and AI. Over the past 10+ years, I’ve helped global organizations adopt cutting-edge tech and uncover clear business value.",
-  followup: "These days, I partner with teams of all sizes to tackle complex problems and capture more ROI on tech investments.",
+  followup: "These days, I partner with teams of all sizes to tackle complex problems and help them capture more ROI on tech investments.",
 };
 
 export type Link = { label: string; url: string };
