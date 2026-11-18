@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
     industry: "Technology",
     highlight: "Multi-module scope",
     outcome: "Bring infrastructure compliance into one system.",
-    context: "Global technology company · Appian proof of concept",
+    context: "Global technology company · Appian customer",
     summary:
       "Led onsite discovery for an infrastructure compliance platform. I defined the requirements and data model and led two solutions consultants through the proof of concept, which showed how teams could track vendor, site, and access compliance in one place.",
   },
@@ -90,7 +90,7 @@ export const PROJECTS: Project[] = [
     industry: "Healthcare",
     highlight: "3 systems → 1",
     outcome: "Show how a health insurer could consolidate provider data and reduce rekeying.",
-    context: "Health insurer · Appian demos",
+    context: "Health insurer · Appian customer",
     summary:
       "Built demos that showed how a single provider data workflow could replace three legacy systems. Staff could extract information from provider documents and review it in the same workflow.",
   },
@@ -100,7 +100,7 @@ export const PROJECTS: Project[] = [
     industry: "Healthcare",
     highlight: "High-volume inbox",
     outcome: "Identify which enrollment and billing emails could be triaged automatically.",
-    context: "Regional health insurer · Appian discovery and demo design",
+    context: "Regional health insurer · Appian customer",
     summary:
       "The enrollment and billing inbox received High-volume inbox. I worked with the team to define what could be triaged automatically and wrote the spec for an intake and case management demo.",
   },
@@ -110,7 +110,7 @@ export const PROJECTS: Project[] = [
     industry: "Pharmacy",
     highlight: "2 weeks",
     outcome: "Give pharmacy leadership a prototype and a business case for faster order qualification.",
-    context: "Pharmacy operator · Appian prototype and business case",
+    context: "Pharmacy operator · Appian customer",
     summary:
       "In two weeks, I took pharmacy order qualification from an executive workshop to an interactive prototype and a business case for the VP. The prototype showed how orders could be screened and routed, giving leadership a concrete proposal to evaluate.",
   },
