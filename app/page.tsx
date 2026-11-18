@@ -101,8 +101,13 @@ export default function Home() {
               <p>{HERO.intro}</p>
               <p>{HERO.followup}</p>
             </div>
-            <div className="portrait-frame row-start-1 w-28 sm:col-start-2 sm:w-36 md:w-44">
-              <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="relative z-10 aspect-square w-full rounded-full object-cover" />
+            <div className="row-start-1 w-36 sm:col-start-2 md:w-44">
+              <div className="portrait-frame mx-auto w-28 sm:w-36 md:w-44">
+                <Image src="/david-lewis.png" alt="David Lewis" width={800} height={800} priority className="relative z-10 aspect-square w-full rounded-full object-cover" />
+              </div>
+              <ul aria-label="Professional profiles" className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-2 font-display text-sm">
+                {links.map((link) => <li key={link.url}><ExtLink link={link} /></li>)}
+              </ul>
             </div>
           </div>
 
@@ -120,9 +125,6 @@ export default function Home() {
               Get in touch
             </a>
           </div>
-          <ul aria-label="Professional profiles" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 font-display text-sm">
-            {links.map((link) => <li key={link.url}><ExtLink link={link} /></li>)}
-          </ul>
         </section>
 
         <ProjectGallery />
