@@ -45,18 +45,23 @@ jobs:
       - name: Pull production configuration
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+        run: |
+          vercel_auth="$(printf '%s' "$VERCEL_TOKEN" | tr -d '\r\n')"
+          vercel pull --yes --environment=production --token "$vercel_auth"
 
       - name: Build production artifact
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: vercel build --prod --token "$VERCEL_TOKEN"
+        run: |
+          vercel_auth="$(printf '%s' "$VERCEL_TOKEN" | tr -d '\r\n')"
+          vercel build --prod --token "$vercel_auth"
 
       - name: Deploy production artifact
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           # Deploy an artifact-only directory; record its source commit explicitly.
+          vercel_auth="$(printf '%s' "$VERCEL_TOKEN" | tr -d '\r\n')"
           deploy_dir="$RUNNER_TEMP/portfolio-deploy"
           mkdir -p "$deploy_dir/.vercel"
           cp -R .vercel/output "$deploy_dir/.vercel/output"
@@ -65,7 +70,7 @@ jobs:
             --cwd "$deploy_dir" \
             --meta sourceCommit="$GITHUB_SHA" \
             --meta sourceRepository="$GITHUB_REPOSITORY" \
-            --token "$VERCEL_TOKEN" > "$RUNNER_TEMP/portfolio-deployment.json"
+            --token "$vercel_auth" > "$RUNNER_TEMP/portfolio-deployment.json"
           node --input-type=module <<'JS'
           import { readFileSync, appendFileSync } from "node:fs";
           const result = JSON.parse(readFileSync(process.env.RUNNER_TEMP + "/portfolio-deployment.json", "utf8"));
