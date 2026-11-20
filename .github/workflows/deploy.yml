@@ -60,14 +60,9 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          # Deploy an artifact-only directory; record its source commit explicitly.
+          # Keep the build workspace intact for Next.js file-tracing references.
           vercel_auth="$(printf '%s' "$VERCEL_TOKEN" | tr -d '\r\n')"
-          deploy_dir="$RUNNER_TEMP/portfolio-deploy"
-          mkdir -p "$deploy_dir/.vercel"
-          cp -R .vercel/output "$deploy_dir/.vercel/output"
-          cp .vercel/project.json "$deploy_dir/.vercel/project.json"
           vercel deploy --prebuilt --prod --yes --json \
-            --cwd "$deploy_dir" \
             --meta sourceCommit="$GITHUB_SHA" \
             --meta sourceRepository="$GITHUB_REPOSITORY" \
             --token "$vercel_auth" > "$RUNNER_TEMP/portfolio-deployment.json"
