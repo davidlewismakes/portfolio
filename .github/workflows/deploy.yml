@@ -1,0 +1,91 @@
+name: Deploy portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.repository == 'davidlewismakes/portfolio' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Install deployment CLI
+        run: npm install --global vercel@66.2.0
+
+      - name: Pull production configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+
+      - name: Build production artifact
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token "$VERCEL_TOKEN"
+
+      - name: Deploy production artifact
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          # Deploy an artifact-only directory; record its source commit explicitly.
+          deploy_dir="$RUNNER_TEMP/portfolio-deploy"
+          mkdir -p "$deploy_dir/.vercel"
+          cp -R .vercel/output "$deploy_dir/.vercel/output"
+          cp .vercel/project.json "$deploy_dir/.vercel/project.json"
+          vercel deploy --prebuilt --prod --yes --json \
+            --cwd "$deploy_dir" \
+            --meta sourceCommit="$GITHUB_SHA" \
+            --meta sourceRepository="$GITHUB_REPOSITORY" \
+            --token "$VERCEL_TOKEN" > "$RUNNER_TEMP/portfolio-deployment.json"
+          node --input-type=module <<'JS'
+          import { readFileSync, appendFileSync } from "node:fs";
+          const result = JSON.parse(readFileSync(process.env.RUNNER_TEMP + "/portfolio-deployment.json", "utf8"));
+          if (result.status !== "ok" || result.deployment?.readyState !== "READY") {
+            throw new Error("Vercel did not confirm a ready deployment.");
+          }
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            "Deployed commit " + process.env.GITHUB_SHA + "\n\n" +
+            "[View portfolio](https://davidlewismakes.com)\n");
+          JS
+
+      - name: Verify public site
+        run: |
+          curl --fail --silent --show-error --retry 3 --retry-delay 5 \
+            https://davidlewismakes.com/ > "$RUNNER_TEMP/portfolio-live.html"
+          node --input-type=module <<'JS'
+          import { readFileSync } from "node:fs";
+          const html = readFileSync(process.env.RUNNER_TEMP + "/portfolio-live.html", "utf8");
+          if (!html.includes("Make critical work happen faster.") ||
+              !html.includes("davidlewismakes@gmail.com")) {
+            throw new Error("The public domain did not return the portfolio.");
+          }
+          JS
